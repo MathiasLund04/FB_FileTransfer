@@ -1,0 +1,15 @@
+Denne fil er større og bruges til at teste, at hele filen overføres.
+Linje 2.
+Linje 3.
+Linje 4.
+Linje 5.
+Linje 6.
+Linje 7.
+Linje 8.
+Linje 9.
+Linje 10.
+Linje 11.
+Linje 12.
+Linje 13.
+Linje 14.
+Linje 15.
