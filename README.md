@@ -117,10 +117,10 @@ Det vi ikke fik implementeret fra reviewets side af, var punkt 3, PrintWriter IO
 ## Refleksion
 
 1. Hvor var AI mest nyttig?
-   ....* Generelt var AI god til at hjælpe med at lave en plan for hvordan man skulle tilgå opgaven
-   ....* AI var også god til at kunne få implementeret de forskellige trin hurtigt, hvis den havde de rigtige oplysninger fra starten af.
+   Generelt var AI god til at hjælpe med at lave en plan for hvordan man skulle tilgå opgaven.
+   AI var også god til at kunne få implementeret de forskellige trin hurtigt, hvis den havde de rigtige oplysninger fra starten af.
 2. Hvornår skulle I være kritiske over for AI?
-   ....* Hver gang den havde udført et trin i implementeringsplanen. Vi skulle se igennem hvilken kode den havde tilføjet og se om det var det rigtige og nødvendige der skulle bruges til de enkelte trin.
+   Hver gang den havde udført et trin i implementeringsplanen. Vi skulle se igennem hvilken kode den havde tilføjet og se om det var det rigtige og nødvendige der skulle bruges til de enkelte trin.
 3. Hvordan kontrollerede I, at AI-genereret kode faktisk virkede?
-   ....* Ved at vi fik AI'en til at teste det selv og give os et kort resume af hvad koden skulle gøre, samt selv teste det for at sikre at koden virkede som den skulle. Vi udførte selv de nødvendige tests for at sikre at den havde fulgt de stillede krav og ændrede det til hvis der var noget der manglede i koden.
+   Ved at vi fik AI'en til at teste det selv og give os et kort resume af hvad koden skulle gøre, samt selv teste det for at sikre at koden virkede som den skulle. Vi udførte selv de nødvendige tests for at sikre at den havde fulgt de stillede krav og ændrede det til hvis der var noget der manglede i koden.
    
