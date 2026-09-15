@@ -15,50 +15,57 @@ public class FileClient {
                 try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())))
                 {
-            while (true) {
-                    System.out.print("Indtast forespørgsel (fx GET|'filnavn'): ");
-                    String request = scanner.nextLine();
-
-                    int separatorIndex = request.indexOf('|');
-
-                    if (separatorIndex < 0 || separatorIndex == request.length() - 1) {
-                        System.err.println("Ugyldig forespørgsel. Brug formatet GET|filnavn.");
-                        return;
-                    }
-
-                    out.println(request);
-
-                    String response = in.readLine();
-
-                    if (response != null && response.startsWith("ERROR|")) {
-                        System.err.println("Fejl fra serveren: " + response.substring(6));
-
-                    } else if ("OK".equals(response)) {
-                        String fileName = request.substring(separatorIndex + 1);
-
-                        File downloadDir = new File("downloads");
-                        if (!downloadDir.exists()) {
-                            downloadDir.mkdir();
-                        }
-
-                        File downloadFile = new File(downloadDir, fileName);
-
-
-                        try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
-                            socket.getInputStream().transferTo(buffer);
-
-                            try (FileOutputStream fileOut = new FileOutputStream(downloadFile)) {
-                                buffer.writeTo(fileOut);
-                            }
-                        }
-                        System.out.println("Filen er gemt som: " + fileName + "  i " + downloadDir.getPath());
-                    } else {
-                        System.out.println("Server svarer: " + response);
-                    }
+                    handleRequest(socket, out, in, scanner);
                 }
-            }
+
         } catch (IOException e) {
             System.err.println("Kunne ikke forbinde til serveren: " + e.getMessage());
         }
+    }
+
+    //Sat uden for main
+    private static void handleRequest(Socket socket, PrintWriter out, BufferedReader in, Scanner scanner) throws IOException {
+        while (true) {
+
+            System.out.print("Indtast forespørgsel (fx GET|'filnavn'): ");
+            String request = scanner.nextLine();
+
+            int separatorIndex = request.indexOf('|');
+
+            if (separatorIndex < 0 || separatorIndex == request.length() - 1) {
+                System.err.println("Ugyldig forespørgsel. Brug formatet GET|filnavn.");
+                return;
+            }
+            out.println(request);
+
+            String response = in.readLine();
+
+            if (response != null && response.startsWith("ERROR|")) {
+                System.err.println("Fejl fra serveren: " + response.substring(6));
+
+            } else if ("OK".equals(response)) {
+                String fileName = request.substring(separatorIndex + 1);
+
+                File downloadDir = new File("downloads");
+                if (!downloadDir.exists()) {
+                    downloadDir.mkdir();
+                }
+
+                File downloadFile = new File(downloadDir, fileName);
+
+
+                try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+                    socket.getInputStream().transferTo(buffer);
+
+                    try (FileOutputStream fileOut = new FileOutputStream(downloadFile)) {
+                        buffer.writeTo(fileOut);
+                    }
+                }
+                System.out.println("Filen er gemt som: " + fileName + "  i " + downloadDir.getPath());
+            } else {
+                System.out.println("Server svarer: " + response);
+            }
+        }
+
     }
 }
