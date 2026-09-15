@@ -11,12 +11,16 @@ public class FileServer {
     private static final Path BASE_DIR = Path.of("testdata").toAbsolutePath().normalize();
 
     public static void main(String[] args) {
+        System.out.println("Server startet");
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            while (true) {
+            System.out.println("Venter på klienter");
+            while (!serverSocket.isClosed()) {
                 try (Socket socket = serverSocket.accept();
                      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                      PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                     OutputStream fileOut = socket.getOutputStream()) {
+                     OutputStream fileOut = socket.getOutputStream())
+                {
+                    System.out.println("Forbundet til klient: " + socket.getInetAddress());
                     String request = in.readLine();
                     handleRequest(request, out, fileOut);
                 } catch (IOException e) {
